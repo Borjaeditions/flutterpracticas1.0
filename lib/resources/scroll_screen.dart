@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prueba2/resources/paginaInicio.dart';
 
 
 class ScrollPage extends StatelessWidget {
@@ -7,17 +8,83 @@ class ScrollPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var boxDecoration = BoxDecoration(
+
+          gradient: LinearGradient( //color degradado
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.5, 0.5], //puntos d equiebre del degradado, mejor control
+            colors: [
+
+              Color(0xff5EE8C5),
+              Color(0xff30BAD6),
+            ]
+            
+          ),
+
+        );
     return Scaffold(
-      body: Stack(
-        children: [
+      body: Container(
+        decoration: boxDecoration, //es la variable de arriba ↑
+        child: PageView(
+          //crea la interacción de paginas de manera horizontal o vertical
+          scrollDirection: Axis.vertical, //Axis.Horizontal, por defecto viene en Horizontal
+          physics: BouncingScrollPhysics(), //Crea el efecto de volver a cargar, sin utilizar en este proyecto
+          children: [
 
-          Positioned(child: Background()),
+          Page1(),
+          Bienvenido(),
+          Initialpage()
 
-          Columna(),
-          
-        ],
-      )
+        ],),
+      ),
    );
+  }
+}
+
+class Bienvenido extends StatelessWidget {
+  const Bienvenido({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+    color: Color(0xff30BAD6),
+    child: Center(child: 
+    TextButton(onPressed: (){},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 8),
+        child: Text("Bienvenidos", style: TextStyle(color: Colors.white, fontSize: 20) ),
+      ),
+      style: TextButton.styleFrom(
+
+        backgroundColor: Colors.lightBlue,
+        shape: const StadiumBorder()
+
+      ),
+    ),
+      ),  
+    );
+  }
+}
+
+class Page1 extends StatelessWidget {
+  const Page1({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+
+        Positioned(child: Background()),
+
+        Columna(),
+        
+      ],
+    );
   }
 }
 
